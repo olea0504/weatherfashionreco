@@ -1,0 +1,177 @@
+<!-- "Temperature : " + str(currentTemperature - 273.15) + u"\N{DEGREE SIGN}" + "C" + "<br>" +
+"Atmospheric pressure : " + str(current_pressure) + " hPa" + "<br>" +
+"Humidity : " + str(current_humidiy) + "%" + "<br>" +
+"Description : " + str(weather_description) -->
+
+
+{% extends "base.html" %}
+{% block title %}City Search{% endblock %}
+{% block style %}
+<style>
+    .form {
+        max-width: 500px;
+        max-height: 500px;
+        margin: auto;
+}
+    img{
+        vertical-align: middle;
+        border-style: none;
+        width:100px;
+        height:auto;
+    }
+    input {
+        width: 100%;
+        margin-top: 50px;
+        border-radius: 20px;
+    }
+    textarea:focus, input:focus {
+        outline: none;
+    }
+    input[type=text] {
+        padding: 15px;        
+        background-color: #f1f1f1;
+        border: 0ch;
+        transition: background-color 0.3s linear;
+    }
+    input[type=text]:focus {
+        background-color: aliceblue;        
+    }
+    input[type=submit] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        transition: background-color 0.3s linear;
+    }
+
+    input[type=submit]:hover {
+        background-color: #30a39d;
+        border-radius: 20px;
+    }
+    div {
+        width: 100%;
+        height: 300px;
+        
+        border: 1px solid #000;
+    }
+    div.left {
+        width: 50%;
+        float: left;
+        box-sizing: border-box;
+        
+        background: #ff0;
+    }
+    div.right {
+        width: 50%;
+        float: right;
+        box-sizing: border-box;
+        
+        background: #0ff;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class = "form">
+<form action="#" method="POST">
+   
+        <div name="info" id="info" style="width:50%; float:left;text-align: center; margin-top:160px;">
+            <p>{{cityTitle}}, {{country}}</p>
+            <p>Current Temperature: {{Temperature}} &#8451;</p>
+            <p>Feels like Temperature: {{feels_like}} &#8451;</p>
+            <p>Today's Minimum Temperature: {{temp_min}} &#8451;</p>
+            <p>Today's Maximum Temperature: {{temp_max}} &#8451;</p>
+            {% if temp_range > 5 %}
+            <p>{{name}} has a wide daily temperature range! Don't for got your jacket!!</p> 
+            {% endif %}
+            <p>Daily Temperature Range: {{temp_range}}</p>
+            <p>Atmospheric pressure: {{AtmosphericPressure}} hPa</p>
+            <p>Humidity: {{Humidity}}%</p>
+            <p>Description: {{Description}}</p>
+        </div>
+    <div style="width:50%; float:right; margin-top:150px;">
+    {% if feels_like > 28 %}
+    <script>
+    
+    var image = new Array()
+    image[0] = "{{url_for('static', filename='img/28/1.jpeg')}}";
+    image[1] = "{{url_for('static', filename='img/28/2.jpeg')}}";
+    image[2] = "{{url_for('static', filename='img/28/3.jpeg')}}";
+    image[3] = "{{url_for('static', filename='img/28/4.jpeg')}}";
+    var index = Math.floor(Math.random() * (image.length))
+    document.write("<img style=\"width:300px;display: inline-block;float:center;\" src="+image[index]+">");
+    
+    </script>
+    {% elif feels_like > 22 %}
+    <script>
+    var image = new Array()
+    image[0] = "{{url_for('static', filename='img/23_27/1.jpeg')}}";
+    image[1] = "{{url_for('static', filename='img/23_27/2.jpeg')}}";
+    image[2] = "{{url_for('static', filename='img/23_27/3.jpeg')}}";
+    image[3] = "{{url_for('static', filename='img/23_27/4.jpeg')}}";
+    var index = Math.floor(Math.random() * (image.length))
+    document.write("<img style=\"width:300px;display: inline-block;float:center;\" src="+image[index]+">");
+    
+    </script>
+    {% elif feels_like > 16%}
+    <script>
+    var image = new Array()
+    image[0] = "{{url_for('static', filename='img/20_22/1.jpeg')}}";
+    image[1] = "{{url_for('static', filename='img/20_22/2.jpeg')}}";
+    image[2] = "{{url_for('static', filename='img/20_22/3.jpeg')}}";
+    image[3] = "{{url_for('static', filename='img/20_22/4.jpeg')}}";
+    var index = Math.floor(Math.random() * (image.length))
+    document.write("<img style=\"width:300px;display: inline-block;float:center;\" src="+image[index]+">");
+    
+    </script>
+    {% elif feels_like > 8 %}
+    <script>
+    var image = new Array()
+    image[0] = "{{url_for('static', filename='img/12_16/1.jpeg')}}";
+    image[1] = "{{url_for('static', filename='img/12_16/2.jpeg')}}";
+    image[2] = "{{url_for('static', filename='img/12_16/3.jpeg')}}";
+    image[3] = "{{url_for('static', filename='img/12_16/4.jpeg')}}";
+    var index = Math.floor(Math.random() * (image.length))
+    document.write("<img style=\"width:300px;display: inline-block;float:center;\" src="+image[index]+">");
+    
+    </script>
+    {% elif feels_like > 4 %}
+    <script>
+    var image = new Array()
+    image[0] = "{{url_for('static', filename='img/5_8/1.jpeg')}}";
+    image[1] = "{{url_for('static', filename='img/5_8/2.jpeg')}}";
+    image[2] = "{{url_for('static', filename='img/5_8/3.jpeg')}}";
+    image[3] = "{{url_for('static', filename='img/5_8/4.jpeg')}}";
+    var index = Math.floor(Math.random() * (image.length))
+    document.write("<img style=\"width:300px;display: inline-block;float:center;\" src="+image[index]+">");
+    
+    </script>
+  
+    {% else %}
+    <script>
+    var image = new Array()
+    image[0] = "{{url_for('static', filename='img/_4/1.jpeg')}}";
+    image[1] = "{{url_for('static', filename='img/_4/2.jpeg')}}";
+    image[2] = "{{url_for('static', filename='img/_4/3.jpeg')}}";
+    image[3] = "{{url_for('static', filename='img/_4/4.jpeg')}}";
+    var index = Math.floor(Math.random() * (image.length))
+    document.write("<img style=\"width:300px;display: inline-block;float:center;\" src="+image[index]+">");
+    
+    </script>
+    {% endif %}
+  
+    </div>
+    <!-- <p>{{x}}</p>
+    <form method="POST">
+            <textarea name="note" id="note" class="form-control"></textarea>
+            <br />
+           
+              <button type="submit" class="btn btn-primary">SAVE</button>
+       
+    </form> -->
+    <!-- <p><input type="text" placeholder="Name of City" name="city" required/></p>
+    <p><input type="submit" value="Submit"/></p>     -->
+    
+</form>
+</div>
+{% endblock %}
